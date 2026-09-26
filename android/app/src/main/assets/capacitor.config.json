@@ -1,0 +1,12 @@
+{
+	"appId": "com.vani100k.hinditts",
+	"appName": "Vani 100K Hindi TTS",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https",
+		"cleartext": true
+	},
+	"android": {
+		"allowMixedContent": true
+	}
+}

@@ -11,6 +11,30 @@ export interface SynthesisResult {
 }
 
 /**
+ * Resolves API URL for both web dev/production and Android Capacitor standalone environments.
+ */
+export function getApiEndpoint(path: string): string {
+  // If custom API URL provided in environment (e.g., in mobile build)
+  const envUrl = (import.meta as any).env?.VITE_API_URL;
+  if (envUrl) {
+    return `${envUrl.replace(/\/$/, '')}${path}`;
+  }
+
+  // If running inside Capacitor mobile app WebView (origin is capacitor://localhost or http://localhost)
+  if (
+    typeof window !== 'undefined' &&
+    (window.location.protocol === 'capacitor:' ||
+      window.location.protocol === 'ionic:' ||
+      (window as any).Capacitor?.isNativePlatform?.())
+  ) {
+    // Cloud run backend URL for this app
+    return `https://ais-pre-zmt6lraz6pqlciy5ltrc6q-70565406433.asia-east1.run.app${path}`;
+  }
+
+  return path;
+}
+
+/**
  * Calls the backend Gemini TTS API to generate studio-grade Hindi audio.
  */
 export async function synthesizeGeminiSpeech(
@@ -28,7 +52,7 @@ export async function synthesizeGeminiSpeech(
     };
   }
 
-  const response = await fetch('/api/tts', {
+  const response = await fetch(getApiEndpoint('/api/tts'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
