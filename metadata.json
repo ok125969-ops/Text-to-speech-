@@ -1,0 +1,6 @@
+{
+  "name": "Vani 100K - Hindi Text to Speech Studio",
+  "description": "100,000+ शब्दों का शक्तिशाली हिंदी टेक्स्ट-टू-स्पीच: पुरुष, महिला और प्रौढ़ (Adult) उच्च गुणवत्ता वाली आवाजें, स्मार्ट चंकिंग और निरंतर प्लेबैक।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
